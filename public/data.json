@@ -1,0 +1,109 @@
+{
+    "entities": [
+        {
+            "id": "user",
+            "fields": [
+                {
+                    "id": "username",
+                    "type": "string",
+                    "description": "Username of the user"
+                },
+                {
+                    "id": "password",
+                    "type": "string",
+                    "description": "Password of the user"
+                },
+                {
+                    "id": "loginCount",
+                    "type": "number",
+                    "description": "User's login count"
+                },
+                {
+                    "id": "isActive",
+                    "type": "boolean",
+                    "description": "Is user active?"
+                },
+                {
+                    "id": "profile",
+                    "type": "object",
+                    "description": "User's profile"
+                },
+                {
+                    "id": "posts",
+                    "type": "ObjectId[]",
+                    "description": "User's posts"
+                }
+            ]
+        },
+        {
+            "id": "profile",
+            "fields": [
+                {
+                    "id": "fname",
+                    "type": "string",
+                    "description": "First name of the user"
+                },
+                {
+                    "id": "lname",
+                    "type": "string",
+                    "description": "Last name of the user"
+                },
+                {
+                    "id": "dob",
+                    "type": "Date",
+                    "description": "Date of birth"
+                }
+            ]
+        },
+        {
+            "id": "post",
+            "fields": [
+                {
+                    "id": "_id",
+                    "type": "ObjectId",
+                    "description": "_id of the post"
+                },
+                {
+                    "id": "slug",
+                    "type": "string",
+                    "description": "Slug of the post"
+                },
+                {
+                    "id": "title",
+                    "type": "string",
+                    "description": "Title of the post"
+                },
+                {
+                    "id": "content",
+                    "type": "string",
+                    "description": "Content of the post"
+                },
+                {
+                    "id": "isPublic",
+                    "type": "boolean",
+                    "description": "Is post public?"
+                }
+            ]
+        }
+    ],
+    "references": [
+        {
+            "type": "embed",
+            "source": "user",
+            "target": "profile",
+            "sourceField": "profile",
+            "sourcePosition": "right",
+            "targetPosition": "top"
+        },
+        {
+            "type": "relation",
+            "relationType": "many",
+            "source": "user",
+            "target": "post",
+            "sourceField": "posts",
+            "targetField": "_id",
+            "sourcePosition": "right",
+            "targetPosition": "left"
+        }
+    ]
+}
