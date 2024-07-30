@@ -1,109 +1,1532 @@
 {
-    "entities": [
+  "entities": [
+    {
+      "id": "activities",
+      "fields": [
         {
-            "id": "user",
-            "fields": [
-                {
-                    "id": "username",
-                    "type": "string",
-                    "description": "Username of the user"
-                },
-                {
-                    "id": "password",
-                    "type": "string",
-                    "description": "Password of the user"
-                },
-                {
-                    "id": "loginCount",
-                    "type": "number",
-                    "description": "User's login count"
-                },
-                {
-                    "id": "isActive",
-                    "type": "boolean",
-                    "description": "Is user active?"
-                },
-                {
-                    "id": "profile",
-                    "type": "object",
-                    "description": "User's profile"
-                },
-                {
-                    "id": "posts",
-                    "type": "ObjectId[]",
-                    "description": "User's posts"
-                }
-            ]
+          "id": "_id",
+          "types": ["ObjectId"],
+          "isPrimary": true,
+          "cast": true,
+          "optional": true
         },
         {
-            "id": "profile",
-            "fields": [
-                {
-                    "id": "fname",
-                    "type": "string",
-                    "description": "First name of the user"
-                },
-                {
-                    "id": "lname",
-                    "type": "string",
-                    "description": "Last name of the user"
-                },
-                {
-                    "id": "dob",
-                    "type": "Date",
-                    "description": "Date of birth"
-                }
-            ]
+          "id": "createdAt",
+          "types": ["date"],
+          "cast": true,
+          "optional": true
         },
         {
-            "id": "post",
-            "fields": [
-                {
-                    "id": "_id",
-                    "type": "ObjectId",
-                    "description": "_id of the post"
-                },
-                {
-                    "id": "slug",
-                    "type": "string",
-                    "description": "Slug of the post"
-                },
-                {
-                    "id": "title",
-                    "type": "string",
-                    "description": "Title of the post"
-                },
-                {
-                    "id": "content",
-                    "type": "string",
-                    "description": "Content of the post"
-                },
-                {
-                    "id": "isPublic",
-                    "type": "boolean",
-                    "description": "Is post public?"
-                }
-            ]
+          "id": "updatedAt",
+          "types": ["date"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "createdBy",
+          "types": ["ObjectId"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "subject",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        },
+        { "id": "payload", "types": ["any"], "cast": true, "optional": false }
+      ]
+    },
+    {
+      "id": "envs",
+      "fields": [
+        {
+          "id": "_id",
+          "types": ["ObjectId"],
+          "isPrimary": true,
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "createdAt",
+          "types": ["date"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "updatedAt",
+          "types": ["date"],
+          "cast": true,
+          "optional": true
+        },
+        { "id": "key", "types": ["string"], "cast": true, "optional": false },
+        { "id": "value", "types": ["string"], "cast": true, "optional": false },
+        { "id": "ttl", "types": ["number"], "cast": true, "optional": true }
+      ]
+    },
+    {
+      "id": "collaborators",
+      "fields": [
+        {
+          "id": "_id",
+          "types": ["ObjectId"],
+          "isPrimary": true,
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "createdAt",
+          "types": ["date"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "updatedAt",
+          "types": ["date"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "createdBy",
+          "types": ["ObjectId"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "createdFor",
+          "types": ["ObjectId"],
+          "cast": true,
+          "optional": false
+        },
+        { "id": "role", "types": ["string"], "cast": true, "optional": true },
+        {
+          "id": "isOwned",
+          "types": ["boolean"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "isPrimary",
+          "types": ["boolean"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "account",
+          "types": ["ObjectId"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "isBlocked",
+          "types": ["boolean"],
+          "cast": true,
+          "optional": true
         }
-    ],
-    "references": [
+      ]
+    },
+    {
+      "id": "transactions",
+      "fields": [
         {
-            "type": "embed",
-            "source": "user",
-            "target": "profile",
-            "sourceField": "profile",
-            "sourcePosition": "right",
-            "targetPosition": "top"
+          "id": "_id",
+          "types": ["ObjectId"],
+          "isPrimary": true,
+          "cast": true,
+          "optional": true
         },
         {
-            "type": "relation",
-            "relationType": "many",
-            "source": "user",
-            "target": "post",
-            "sourceField": "posts",
-            "targetField": "_id",
-            "sourcePosition": "right",
-            "targetPosition": "left"
+          "id": "createdAt",
+          "types": ["date"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "updatedAt",
+          "types": ["date"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "createdBy",
+          "types": ["ObjectId"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "sessionId",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "reference",
+          "types": ["string"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "foreignRefType",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "foreignRef",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "fromName",
+          "types": ["string"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "from",
+          "types": ["ObjectId"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "sender",
+          "types": ["ObjectId"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "toName",
+          "types": ["string"],
+          "cast": true,
+          "optional": false
+        },
+        { "id": "to", "types": ["ObjectId"], "cast": true, "optional": false },
+        {
+          "id": "receiver",
+          "types": ["ObjectId"],
+          "cast": true,
+          "optional": false
+        },
+        { "id": "type", "types": ["string"], "cast": true, "optional": false },
+        { "id": "description", "types": ["object", "string"], "isAnyOf": true },
+        {
+          "id": "tags",
+          "types": ["string"],
+          "isArray": true,
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "currency",
+          "types": ["string"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "amount",
+          "types": ["number"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "methodOf3DSecurity",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        },
+        { "id": "status", "types": ["string"] },
+        {
+          "id": "isRefund",
+          "types": ["boolean"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "isRefunded",
+          "types": ["boolean"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "metadata",
+          "types": ["object"],
+          "cast": true,
+          "optional": true
         }
-    ]
+      ]
+    },
+    {
+      "id": "wallets",
+      "fields": [
+        {
+          "id": "_id",
+          "types": ["ObjectId"],
+          "isPrimary": true,
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "createdAt",
+          "types": ["date"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "updatedAt",
+          "types": ["date"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "account",
+          "types": ["ObjectId"],
+          "cast": true,
+          "optional": false
+        },
+        { "id": "type", "types": ["string"], "cast": true, "optional": false },
+        {
+          "id": "currency",
+          "types": ["string"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "balance",
+          "types": ["number"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "digest",
+          "types": ["string"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "lastBalance",
+          "types": ["number"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "lastTxnReference",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        }
+      ]
+    },
+    {
+      "id": "users",
+      "fields": [
+        {
+          "id": "_id",
+          "types": ["ObjectId"],
+          "isPrimary": true,
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "username",
+          "types": ["string"],
+          "cast": true,
+          "optional": false,
+          "patterns": ["/^(?=[a-zA-Z0-9._]{4,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/"]
+        },
+        {
+          "id": "password",
+          "types": ["string"],
+          "cast": true,
+          "optional": false,
+          "minLength": 6
+        },
+        { "id": "avatar", "types": ["object"], "cast": true, "optional": true },
+        {
+          "id": "avatar._id",
+          "types": ["ObjectId"],
+          "isPrimary": true,
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "avatar.createdBy",
+          "types": ["ObjectId"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "avatar.name",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "avatar.url",
+          "types": ["string"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "avatar.mimeType",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "avatar.sizeInBytes",
+          "types": ["number"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "avatar.alt",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "tags",
+          "types": ["string"],
+          "isArray": true,
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "email",
+          "types": ["string"],
+          "cast": true,
+          "optional": true,
+          "patterns": [
+            "/^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-]+)(\\.[a-zA-Z]{2,5}){1,2}$/"
+          ]
+        },
+        {
+          "id": "phone",
+          "types": ["string"],
+          "cast": true,
+          "optional": true,
+          "patterns": [
+            "/^\\+((?:9[679]|8[035789]|6[789]|5[90]|42|3[578]|2[1-689])|9[0-58]|8[1246]|6[0-6]|5[1-8]|4[013-9]|3[0-469]|2[70]|7|1)(?:\\W*\\d){7,13}\\d$/"
+          ]
+        },
+        { "id": "fname", "types": ["string"], "cast": true, "optional": false },
+        { "id": "mname", "types": ["string"], "cast": true, "optional": true },
+        { "id": "lname", "types": ["string"], "cast": true, "optional": true },
+        { "id": "gender", "types": ["string"] },
+        { "id": "dob", "types": ["date"], "cast": true, "optional": true },
+        { "id": "locale", "types": ["string"], "cast": true, "optional": true },
+        {
+          "id": "country",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        },
+        { "id": "state", "types": ["string"], "cast": true, "optional": true },
+        { "id": "city", "types": ["string"], "cast": true, "optional": true },
+        {
+          "id": "address_1",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "address_2",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "postalCode",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "createdAt",
+          "types": ["date"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "updatedAt",
+          "types": ["date"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "oauthApp",
+          "types": ["ObjectId"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "reference",
+          "types": ["string"],
+          "cast": true,
+          "optional": true,
+          "patterns": ["/^(UID|CID)[0-9]{5,}$/"]
+        },
+        {
+          "id": "passwordHistory",
+          "types": ["string"],
+          "isArray": true,
+          "cast": true,
+          "optional": false
+        },
+        { "id": "role", "types": ["string"], "cast": true, "optional": false },
+        {
+          "id": "isEmailVerified",
+          "types": ["boolean"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "isPhoneVerified",
+          "types": ["boolean"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "lastLogin",
+          "types": ["date"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "loginCount",
+          "types": ["number"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "failedLoginAttempts",
+          "types": ["number"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "fcmDeviceTokens",
+          "types": ["string"],
+          "isArray": true,
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "passkeys",
+          "types": ["object"],
+          "isArray": true,
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "passkeys[].id",
+          "types": ["string"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "passkeys[].publicKey",
+          "types": ["string"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "passkeys[].counter",
+          "types": ["number"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "passkeys[].deviceType",
+          "types": ["string"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "passkeys[].backedUp",
+          "types": ["boolean"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "passkeys[].transports",
+          "types": ["string"],
+          "isArray": true,
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "passkeys[].timestamp",
+          "types": ["date"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "passkeyEnabled",
+          "types": ["boolean"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "requiresMfa",
+          "types": ["boolean"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "isBlocked",
+          "types": ["boolean"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "collaborates",
+          "types": ["ObjectId"],
+          "isArray": true,
+          "cast": true,
+          "optional": false
+        },
+        { "id": "deletionAt", "types": ["date", "null"], "isAnyOf": true }
+      ]
+    },
+    {
+      "id": "accountInvites",
+      "fields": [
+        {
+          "id": "_id",
+          "types": ["ObjectId"],
+          "isPrimary": true,
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "createdAt",
+          "types": ["date"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "updatedAt",
+          "types": ["date"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "createdBy",
+          "types": ["ObjectId"],
+          "cast": true,
+          "optional": false
+        },
+        { "id": "recipient", "types": ["string"], "isAnyOf": true },
+        { "id": "role", "types": ["string"], "cast": true, "optional": false },
+        {
+          "id": "account",
+          "types": ["ObjectId"],
+          "cast": true,
+          "optional": false
+        },
+        { "id": "token", "types": ["string"], "cast": true, "optional": true }
+      ]
+    },
+    {
+      "id": "oauthSessions",
+      "fields": [
+        {
+          "id": "_id",
+          "types": ["ObjectId"],
+          "isPrimary": true,
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "createdAt",
+          "types": ["date"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "updatedAt",
+          "types": ["date"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "expiresAt",
+          "types": ["date"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "createdBy",
+          "types": ["ObjectId"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "oauthApp",
+          "types": ["ObjectId"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "useragent",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "version",
+          "types": ["number"],
+          "cast": true,
+          "optional": false
+        },
+        { "id": "provider", "types": ["string"] },
+        { "id": "scopes", "types": ["object"], "cast": true, "optional": false }
+      ]
+    },
+    {
+      "id": "oauthPolicies",
+      "fields": [
+        {
+          "id": "_id",
+          "types": ["ObjectId"],
+          "isPrimary": true,
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "createdAt",
+          "types": ["date"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "updatedAt",
+          "types": ["date"],
+          "cast": true,
+          "optional": true
+        },
+        { "id": "role", "types": ["string"], "cast": true, "optional": false },
+        {
+          "id": "scopes",
+          "types": ["string"],
+          "isArray": true,
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "subRoles",
+          "types": ["string"],
+          "isArray": true,
+          "cast": true,
+          "optional": true
+        },
+        { "id": "ttl", "types": ["number"], "cast": true, "optional": true }
+      ]
+    },
+    {
+      "id": "oauthSecrets",
+      "fields": [
+        {
+          "id": "_id",
+          "types": ["ObjectId"],
+          "isPrimary": true,
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "createdAt",
+          "types": ["date"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "updatedAt",
+          "types": ["date"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "expiresAt",
+          "types": ["date"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "createdBy",
+          "types": ["ObjectId"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "oauthApp",
+          "types": ["ObjectId"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "name",
+          "types": ["string"],
+          "cast": true,
+          "optional": false,
+          "minLength": 2,
+          "maxLength": 300
+        },
+        {
+          "id": "scopes",
+          "types": ["object"],
+          "cast": true,
+          "optional": false
+        },
+        { "id": "status", "types": ["string"] }
+      ]
+    },
+    {
+      "id": "requestLogs",
+      "fields": [
+        {
+          "id": "_id",
+          "types": ["ObjectId"],
+          "isPrimary": true,
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "createdAt",
+          "types": ["date"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "createdBy",
+          "types": ["ObjectId"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "account",
+          "types": ["ObjectId"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "namespace",
+          "types": ["string"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "requestId",
+          "types": ["string"],
+          "cast": true,
+          "optional": false
+        },
+        { "id": "method", "types": ["string"] },
+        { "id": "url", "types": ["string"], "cast": true, "optional": false },
+        {
+          "id": "headers",
+          "types": ["object"],
+          "cast": true,
+          "optional": false
+        },
+        { "id": "body", "types": ["any"], "cast": true, "optional": false },
+        { "id": "auth", "types": ["object"], "cast": true, "optional": true },
+        {
+          "id": "auth.secretId",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "auth.sessionId",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "auth.userId",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "auth.accountId",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "auth.isAccountOwned",
+          "types": ["boolean"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "auth.isAccountPrimary",
+          "types": ["boolean"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "auth.role",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "auth.accountRole",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "auth.resolvedRole",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "responseStatus",
+          "types": ["number"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "response",
+          "types": ["object"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "response.status",
+          "types": ["boolean"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "response.messages",
+          "types": ["any"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "response.data",
+          "types": ["any"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "response.metrics",
+          "types": ["object"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "response.errorStack",
+          "types": ["any"],
+          "cast": true,
+          "optional": false
+        }
+      ]
+    },
+    {
+      "id": "accounts",
+      "fields": [
+        {
+          "id": "_id",
+          "types": ["ObjectId"],
+          "isPrimary": true,
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "createdAt",
+          "types": ["date"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "updatedAt",
+          "types": ["date"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "createdBy",
+          "types": ["ObjectId"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "createdFor",
+          "types": ["ObjectId"],
+          "cast": true,
+          "optional": false
+        },
+        { "id": "logo", "types": ["object"], "cast": true, "optional": true },
+        {
+          "id": "logo._id",
+          "types": ["ObjectId"],
+          "isPrimary": true,
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "logo.createdBy",
+          "types": ["ObjectId"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "logo.name",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "logo.url",
+          "types": ["string"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "logo.mimeType",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "logo.sizeInBytes",
+          "types": ["number"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "logo.alt",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "isBlocked",
+          "types": ["boolean"],
+          "cast": true,
+          "optional": true
+        },
+        { "id": "name", "types": ["string"], "cast": true, "optional": true },
+        {
+          "id": "description",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "email",
+          "types": ["string"],
+          "cast": true,
+          "optional": true,
+          "patterns": [
+            "/^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-]+)(\\.[a-zA-Z]{2,5}){1,2}$/"
+          ]
+        },
+        {
+          "id": "phone",
+          "types": ["string"],
+          "cast": true,
+          "optional": true,
+          "patterns": [
+            "/^\\+((?:9[679]|8[035789]|6[789]|5[90]|42|3[578]|2[1-689])|9[0-58]|8[1246]|6[0-6]|5[1-8]|4[013-9]|3[0-469]|2[70]|7|1)(?:\\W*\\d){7,13}\\d$/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oauthApps",
+      "fields": [
+        {
+          "id": "_id",
+          "types": ["ObjectId"],
+          "isPrimary": true,
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "createdAt",
+          "types": ["date"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "updatedAt",
+          "types": ["date"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "account",
+          "types": ["ObjectId"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "createdBy",
+          "types": ["ObjectId"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "name",
+          "types": ["string"],
+          "cast": true,
+          "optional": false,
+          "minLength": 2,
+          "maxLength": 50
+        },
+        {
+          "id": "description",
+          "types": ["string"],
+          "cast": true,
+          "optional": true,
+          "minLength": 30,
+          "maxLength": 300
+        },
+        {
+          "id": "enabled",
+          "types": ["boolean"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "consent",
+          "types": ["object"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "consent.passkeyEnabled",
+          "types": ["boolean"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "consent.availableCountryCodes",
+          "types": ["string"],
+          "isArray": true,
+          "cast": true,
+          "optional": true,
+          "minLength": 1
+        },
+        {
+          "id": "consent.requiredIdentificationMethods",
+          "types": ["string"],
+          "isArray": true,
+          "cast": true,
+          "optional": true,
+          "minLength": 1
+        },
+        {
+          "id": "consent.logo",
+          "types": ["object"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "consent.logo._id",
+          "types": ["ObjectId"],
+          "isPrimary": true,
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "consent.logo.createdBy",
+          "types": ["ObjectId"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "consent.logo.name",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "consent.logo.url",
+          "types": ["string"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "consent.logo.mimeType",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "consent.logo.sizeInBytes",
+          "types": ["number"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "consent.logo.alt",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "consent.primaryColor",
+          "types": ["string"],
+          "cast": true,
+          "optional": false,
+          "patterns": ["/^#(?:[0-9a-fA-F]{3}){1,2}$/"]
+        },
+        {
+          "id": "consent.primaryColorDark",
+          "types": ["string"],
+          "cast": true,
+          "optional": true,
+          "patterns": ["/^#(?:[0-9a-fA-F]{3}){1,2}$/"]
+        },
+        {
+          "id": "consent.secondaryColor",
+          "types": ["string"],
+          "cast": true,
+          "optional": false,
+          "patterns": ["/^#(?:[0-9a-fA-F]{3}){1,2}$/"]
+        },
+        {
+          "id": "consent.secondaryColorDark",
+          "types": ["string"],
+          "cast": true,
+          "optional": true,
+          "patterns": ["/^#(?:[0-9a-fA-F]{3}){1,2}$/"]
+        },
+        {
+          "id": "consent.styling",
+          "types": ["object"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "consent.styling.roundness",
+          "types": ["number"],
+          "cast": true,
+          "optional": true,
+          "minAmount": 0,
+          "maxAmount": 100
+        },
+        {
+          "id": "consent.passwordPolicy",
+          "types": ["object"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "consent.passwordPolicy.strength",
+          "types": ["number"],
+          "cast": true,
+          "optional": true,
+          "minAmount": 0,
+          "maxAmount": 2
+        },
+        {
+          "id": "consent.passwordPolicy.minLength",
+          "types": ["number"],
+          "cast": true,
+          "optional": true,
+          "minAmount": 6
+        },
+        {
+          "id": "consent.passwordPolicy.maxLength",
+          "types": ["number"],
+          "cast": true,
+          "optional": true,
+          "minAmount": 6
+        },
+        {
+          "id": "consent.allowedCallbackURLs",
+          "types": ["string"],
+          "isArray": true,
+          "cast": true,
+          "optional": false,
+          "minLength": 1
+        },
+        {
+          "id": "consent.homepageURL",
+          "types": ["string"],
+          "cast": true,
+          "optional": false
+        },
+        {
+          "id": "consent.privacyPolicyURL",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "consent.termsAndConditionsURL",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "consent.supportURL",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "integrations",
+          "types": ["object"],
+          "isArray": true,
+          "cast": true,
+          "optional": true
+        },
+        { "id": "integrations[].id", "types": ["string"] },
+        {
+          "id": "integrations[].enabled",
+          "types": ["boolean"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "integrations[].publicKey",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "integrations[].secretKey",
+          "types": ["string"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "integrations[].props",
+          "types": ["object"],
+          "cast": true,
+          "optional": true
+        },
+        {
+          "id": "metadata",
+          "types": ["object"],
+          "cast": true,
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "relation",
+      "source": "activities",
+      "target": "users",
+      "relationType": "one",
+      "sourceField": "createdBy",
+      "targetField": "_id",
+      "sourcePosition": "right",
+      "targetPosition": "left"
+    },
+    {
+      "type": "relation",
+      "source": "collaborators",
+      "target": "users",
+      "relationType": "one",
+      "sourceField": "createdBy",
+      "targetField": "_id",
+      "sourcePosition": "right",
+      "targetPosition": "left"
+    },
+    {
+      "type": "relation",
+      "source": "collaborators",
+      "target": "accounts",
+      "relationType": "one",
+      "sourceField": "account",
+      "targetField": "_id",
+      "sourcePosition": "left",
+      "targetPosition": "right"
+    },
+    {
+      "type": "relation",
+      "source": "transactions",
+      "target": "users",
+      "relationType": "one",
+      "sourceField": "createdBy",
+      "targetField": "_id",
+      "sourcePosition": "right",
+      "targetPosition": "left"
+    },
+    {
+      "type": "relation",
+      "source": "transactions",
+      "target": "users",
+      "relationType": "one",
+      "sourceField": "from",
+      "targetField": "_id",
+      "sourcePosition": "right",
+      "targetPosition": "left"
+    },
+    {
+      "type": "relation",
+      "source": "transactions",
+      "target": "users",
+      "relationType": "one",
+      "sourceField": "sender",
+      "targetField": "_id",
+      "sourcePosition": "left",
+      "targetPosition": "right"
+    },
+    {
+      "type": "relation",
+      "source": "transactions",
+      "target": "users",
+      "relationType": "one",
+      "sourceField": "to",
+      "targetField": "_id",
+      "sourcePosition": "left",
+      "targetPosition": "right"
+    },
+    {
+      "type": "relation",
+      "source": "transactions",
+      "target": "users",
+      "relationType": "one",
+      "sourceField": "receiver",
+      "targetField": "_id",
+      "sourcePosition": "right",
+      "targetPosition": "left"
+    },
+    {
+      "type": "relation",
+      "source": "wallets",
+      "target": "accounts",
+      "relationType": "one",
+      "sourceField": "account",
+      "targetField": "_id",
+      "sourcePosition": "right",
+      "targetPosition": "left"
+    },
+    {
+      "type": "relation",
+      "source": "users",
+      "target": "oauthApps",
+      "relationType": "one",
+      "sourceField": "oauthApp",
+      "targetField": "_id",
+      "sourcePosition": "left",
+      "targetPosition": "right"
+    },
+    {
+      "type": "relation",
+      "source": "accountInvites",
+      "target": "users",
+      "relationType": "one",
+      "sourceField": "createdBy",
+      "targetField": "_id",
+      "sourcePosition": "right",
+      "targetPosition": "left"
+    },
+    {
+      "type": "relation",
+      "source": "accountInvites",
+      "target": "accounts",
+      "relationType": "one",
+      "sourceField": "account",
+      "targetField": "_id",
+      "sourcePosition": "left",
+      "targetPosition": "right"
+    },
+    {
+      "type": "relation",
+      "source": "oauthSessions",
+      "target": "users",
+      "relationType": "one",
+      "sourceField": "createdBy",
+      "targetField": "_id",
+      "sourcePosition": "left",
+      "targetPosition": "right"
+    },
+    {
+      "type": "relation",
+      "source": "oauthSessions",
+      "target": "oauthApps",
+      "relationType": "one",
+      "sourceField": "oauthApp",
+      "targetField": "_id",
+      "sourcePosition": "right",
+      "targetPosition": "left"
+    },
+    {
+      "type": "relation",
+      "source": "oauthSecrets",
+      "target": "users",
+      "relationType": "one",
+      "sourceField": "createdBy",
+      "targetField": "_id",
+      "sourcePosition": "left",
+      "targetPosition": "right"
+    },
+    {
+      "type": "relation",
+      "source": "oauthSecrets",
+      "target": "oauthApps",
+      "relationType": "one",
+      "sourceField": "oauthApp",
+      "targetField": "_id",
+      "sourcePosition": "right",
+      "targetPosition": "left"
+    },
+    {
+      "type": "relation",
+      "source": "requestLogs",
+      "target": "users",
+      "relationType": "one",
+      "sourceField": "createdBy",
+      "targetField": "_id",
+      "sourcePosition": "left",
+      "targetPosition": "right"
+    },
+    {
+      "type": "relation",
+      "source": "requestLogs",
+      "target": "accounts",
+      "relationType": "one",
+      "sourceField": "account",
+      "targetField": "_id",
+      "sourcePosition": "right",
+      "targetPosition": "left"
+    },
+    {
+      "type": "relation",
+      "source": "accounts",
+      "target": "users",
+      "relationType": "one",
+      "sourceField": "createdBy",
+      "targetField": "_id",
+      "sourcePosition": "right",
+      "targetPosition": "left"
+    },
+    {
+      "type": "relation",
+      "source": "oauthApps",
+      "target": "accounts",
+      "relationType": "one",
+      "sourceField": "account",
+      "targetField": "_id",
+      "sourcePosition": "right",
+      "targetPosition": "left"
+    },
+    {
+      "type": "relation",
+      "source": "oauthApps",
+      "target": "users",
+      "relationType": "one",
+      "sourceField": "createdBy",
+      "targetField": "_id",
+      "sourcePosition": "left",
+      "targetPosition": "right"
+    }
+  ]
 }
