@@ -22,7 +22,9 @@ import { Relation } from "./components/Relation";
 import { Markers } from "./components/svg/Markers";
 
 const fetchData = async (): Promise<IRawData> => {
-  return await fetch("data.json").then((_) => _.json());
+  return await fetch(import.meta.env.BASE_URL + "data.json").then((_) =>
+    _.json(),
+  );
 };
 
 const getLayoutedElements = (
